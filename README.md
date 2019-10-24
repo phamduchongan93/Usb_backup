@@ -10,3 +10,5 @@
 
 
 ## In development
+- provide help page for command guide.
+- generate installation packages.
