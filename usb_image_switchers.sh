@@ -1,33 +1,18 @@
 #!/bin/bash
 # Description: Script to produce an image of the current attached usb to store it as backup.
-
-
-
-# checking if the user have sudo  privellege
-
-
-
-
 # finding the usb device
-
-
 # sudo checker
+# 
+# 1. check the user
+# 2. find the name of the usb
+# 3. verify with user that they want to change the script.
+
+
 if [ "`whoami`" != root ]
 then
 	echo "You need root privellege to run this script. You may do so by typing sudo prior to the the command" 
 	exit 1
 fi;
-
-
-: '
-# function to get label of the usb
-function label_getting() {
-	label_name="`e2label /dev/$1`";
-	return "$label_name"
-}
-' 
-
-
 
 # compressing the image
 function compressing() {
@@ -37,10 +22,8 @@ then
 fi;
 }
 
-usb_name="`lsblk -o NAME,TRAN | grep -i usb | cut -f 1 -d ' '`"
-
+usb_name="`lsblk -o NAME,TRAN | grep -i usb | cut -f 1 -d ' '`" # get the name of usb
 echo " Deploying usb wiping sequence. You can't postpone this process and will loose your usb data." 
-
 while true;
 do
 	read -p "Do you want to perform this task? (y/n)" choice;
